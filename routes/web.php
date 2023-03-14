@@ -18,23 +18,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('schools/ajax', [SchoolController::class, 'ajaxData'])->name('schools.ajax');
+Route::get('students/ajax', [StudentController::class, 'ajaxData'])->name('students.ajax');
 
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
 
-    Route::get('students/ajax', [StudentController::class, 'ajaxData'])->name('students.ajax');
+
     Route::resource('students', StudentController::class)->only(['index','store','update']);;
 
-    Route::get('schools/ajax', [SchoolController::class, 'ajaxData'])->name('schools.ajax');
+
     Route::resource('schools', SchoolController::class)->only(['index','store','update']);
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
