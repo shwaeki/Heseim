@@ -21,10 +21,9 @@ class StudentsDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row) {
-                return '<button onclick="editStudent('.$row->id.')" data-he_name="'.$row->he_name.'" data-he_name="'.$row->ar_name.'" class="main-btn dark-btn btn-hover btn-sm">Edit</a>';
+                return '<button onclick="editStudent(this,'.$row->id.')" data-he-name="'.$row->he_name.'" data-ar-name="'.$row->ar_name.'" class="main-btn dark-btn btn-hover btn-sm">Edit</a>';
             })
-            ->rawColumns(['action' => 'action'])
-
+            ->rawColumns(['action'])
             ->setRowId('id');
     }
 
@@ -46,8 +45,8 @@ class StudentsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('frtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle();
+                    ->orderBy(1);
+                   // ->selectStyleSingle();
     }
 
     /**
@@ -56,10 +55,10 @@ class StudentsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('he_name'),
-            Column::make('ar_name'),
-            Column::computed('action')
+            ['name' => 'id', 'title' => 'ID', 'data' => 'id'],
+            ['name' => 'he_name', 'title' => 'Hebrew Name', 'data' => 'he_name'],
+            ['name' => 'ar_name', 'title' => 'Arabic Name', 'data' => 'ar_name'],
+            ['name' => 'action', 'title' => 'Action', 'data' => 'action'],
         ];
     }
 

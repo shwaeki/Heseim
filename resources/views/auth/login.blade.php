@@ -8,7 +8,7 @@
                     <h1 class="text-primary mb-10">{{ __('Login') }}</h1>
                 </div>
                 <div class="cover-image">
-                    <img src="{{ asset('images/auth/signin-image.svg') }}" alt="">
+                    <img src="{{ asset('images/logo/logo.png') }}" alt="">
                 </div>
                 <div class="shape-image">
                     <img src="{{ asset('images/auth/shape.svg') }}" alt="">

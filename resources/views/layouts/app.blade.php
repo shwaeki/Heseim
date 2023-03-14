@@ -48,11 +48,11 @@
                         <!-- profile start -->
                         <div class="profile-box ml-15">
                             <button
-                                    class="dropdown-toggle bg-transparent border-0"
-                                    type="button"
-                                    id="profile"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
+                                class="dropdown-toggle bg-transparent border-0"
+                                type="button"
+                                id="profile"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
                             >
                                 <div class="profile-info">
                                     <div class="info">
@@ -63,12 +63,15 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                 <li>
-                                        <a href="{{ route('profile.show') }}"> <i class="lni lni-user"></i> {{ __('My profile') }}</a>
+                                    <a href="{{ route('profile.show') }}"> <i
+                                            class="lni lni-user"></i> {{ __('My profile') }}</a>
                                 </li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"> <i class="lni lni-exit"></i> {{ __('Logout') }}</a>
+                                        @csrf
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault(); this.closest('form').submit();"> <i
+                                                class="lni lni-exit"></i> {{ __('Logout') }}</a>
                                     </form>
                                 </li>
                             </ul>
@@ -84,6 +87,23 @@
     <!-- ========== section start ========== -->
     <section class="section">
         <div class="container-fluid">
+            @if (session()->has('message'))
+                <div class="alert-box info-alert mt-3">
+                    <div class="alert">
+                        <p class="text-medium">{{ session('message') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert-box danger-alert mt-3">
+                    <div class="alert">
+                        @foreach ($errors->all() as $error)
+                            <p class="text-medium">{{ $error }}</p>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </div>
         <!-- end container -->
@@ -94,10 +114,9 @@
 <!-- ======== main-wrapper end =========== -->
 
 <!-- ========= All Javascript files linkup ======== -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
 @vite('resources/js/app.js')
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 @stack('scripts')
 </body>
 </html>

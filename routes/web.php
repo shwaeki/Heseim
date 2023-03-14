@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('students/ajax', [StudentController::class, 'ajaxData'])->name('students.ajax');
     Route::resource('students', StudentController::class);
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
