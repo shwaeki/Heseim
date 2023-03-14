@@ -21,11 +21,9 @@ class StudentController extends Controller
 
     public function ajaxData()
     {
-
         return Cache::rememberForever('students', function () {
             return Student::all()->pluck('ar_name','he_name');
         });
-
     }
 
 
